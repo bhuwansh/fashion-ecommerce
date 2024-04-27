@@ -1,7 +1,7 @@
 <?php
 
 ?>
-
+<!-- login.php -->
 <!doctype html>
 <html class="no-js" lang="">
    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
