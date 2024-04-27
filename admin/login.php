@@ -1,6 +1,7 @@
 <?php
-
+required('connection.inc.php');
 ?>
+
 <!-- login.php -->
 <!doctype html>
 <html class="no-js" lang="">
