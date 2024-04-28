@@ -1,5 +1,11 @@
 <?php
-required('connection.inc.php');
-?>
+function pr($arr) {
+    echo '<pre>';
+    print_r($arr);
+}
 
-<!-- function.php -->
+function prx($arr) {
+    echo '<pre>';
+    print_r($arr);
+    die();
+}
