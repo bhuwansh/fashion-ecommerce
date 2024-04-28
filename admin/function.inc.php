@@ -9,3 +9,6 @@ function prx($arr) {
     print_r($arr);
     die();
 }
+function get_safe_value($str){
+    return mysqli_real_escape_string($con,$str);
+}
