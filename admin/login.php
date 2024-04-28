@@ -10,8 +10,8 @@ if(isset($_POST['submit'])){
    $count=mysqli_num_rows($res);
    if($count>0)
    {
-      $SESSION['ADMIN_LOGIN']='yes';
-      $SESSION['ADMIN_USERNAME']=$username;
+      $_SESSION['ADMIN_LOGIN']='yes';
+      $_ESSION['ADMIN_USERNAME']=$username;
       header('location:categories.php');
       die();
    }else{
