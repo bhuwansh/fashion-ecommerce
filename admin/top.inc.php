@@ -2,13 +2,12 @@
 required('connection.inc.php');
 required('function.inc.php');
 
-
-   if(isset($_SESSION['ADMIN_LOGIN']) && $SESSION['ADMIN_LOGIN']!=''){
-    else{
-        header('location:login.php')
+if(isset($_SESSION['ADMIN_LOGIN']) && $SESSION['ADMIN_LOGIN']!=''){
+}else{
+        header('location:login.php');
         die();
-    }
-   }
+     }
+   
 ?>
 <!doctype html>
 <html class="no-js" lang="">
