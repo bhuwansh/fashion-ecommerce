@@ -6,8 +6,15 @@ $msg='';
 if($isset($_GET['id']) && ($isset($_GET['id'])!='')){
     $id=get_safe_value($con,$_GET['id']);
     $res=mysqli_query($con,"select * from categories where id='$id'");
-    $row=mysqli_fetch_assoc($res);
+    $check=mysqli_num_rows($res);
+    if($check>0){
+     $row=mysqli_fetch_assoc($res);
     $categories=$row['categories'];
+    }else{
+        header(location:categories.php);
+        die();
+    }
+}
 
 if($isset($_POST['submit'])){
     $categories=get_safe_value($con,$_POST['categories']);
@@ -18,14 +25,15 @@ if($isset($_POST['submit'])){
         if($isset($_GET['id']) && ($isset($_GET['id'])!='')){
          $getData=mysqli_fetch_assoc($res);
          if($id==$getData['id']){
-
-         }
+          }
         }else{
         $msg="Category Already Exist";
-        }else{
-            $msg="Category Already Exist";   
+        }
+            }else{
+               $msg="Category Already Exist";   
         }
     }
+
     if($msg==''){
         if($isset($_GET['id']) && ($isset($_GET['id'])!='')){
             mysqli_query($con,"update categories set categories=''$categories where id='$id'");
@@ -35,7 +43,7 @@ if($isset($_POST['submit'])){
         header('location:categories.php');
         die();
     }
-}
+
 if($isset($_GET['id']) && ($isset($_GET['id'])!='')){
     $id=get_safe_value($con,$_GET['id']);
     $res=mysqli_query($con,"select * from categories where id='$id'");
@@ -53,7 +61,7 @@ if($isset($_GET['id']) && ($isset($_GET['id'])!='')){
                          <div class="card-body card-block">
                            <div class="form-group">
                            <label for="categories" class=" form-control-label">Categories</label><input type="text" 
-                             id="categories" placeholder="Enter Categories name" class="form-control" required value=<?php echp $categories?>>
+                             id="categories" placeholder="Enter Categories name" class="form-control" required value=<?php echo $categories?>>
                             </div>
                                <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
                                <span id="payment-button-amount">Submit</span>
