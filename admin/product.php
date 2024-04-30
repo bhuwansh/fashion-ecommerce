@@ -58,7 +58,7 @@ $res=mysqli_query($con,$sql);
                                        <td class="serial"><?php echo $i?></td>
                                         <td><?php echo $row['id']?></td>
                                         <td><?php echo $row['categories_id']?></td>
-                                        <td><?php echo $row['image']?></td>
+                                        <td><img src=" <?php echo PRODUCT_IMAGE_SITE_PATH.$row['image']?"">/></td>
                                         <td><?php echo $row['mrp']?></td>
                                         <td><?php echo $row['price']?></td>
                                         <td><?php echo $row['qty']?></td>
@@ -73,7 +73,7 @@ $res=mysqli_query($con,$sql);
                                                 <a href='?type=status&peration=Active&id=".$row['id']."'>
                                                 Deactive</a></span>&nbsp;";
                                             }
-                                            echo "<span class='badge badge-edit'><a href='manage_categories.php?id=".$row['id']."'>Edit</a></span>&nbsp;"; 
+                                            echo "<span class='badge badge-edit'><a href='manage_product.php?id=".$row['id']."'>Edit</a></span>&nbsp;"; 
                                             echo "<span class='badge badge-delete'><a href='?type=delete&id=".$row['id']."'>Delete</a></span>"; 
                                              ?>
                                         </td>

@@ -1,6 +1,6 @@
 <?php
-required('connection.inc.php');
-required('function.inc.php');
+require('connection.inc.php');
+require('function.inc.php');
 
 if(isset($_POST['submit'])){
    $username=get_safe_value($con,$_POST['username']);

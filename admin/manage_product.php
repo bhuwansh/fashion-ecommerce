@@ -64,16 +64,29 @@ if($isset($_POST['submit'])){
                $msg="Product Already Exist";   
         }
     }
-
-
+    if($_FILES['image']['type']!='' && ($_FILES['image']['type']!='image/png') || 
+    ($_FILES['image']['type']!='image/jpg') || ($_FILES['image']['type']!='image/jpeg'){
+        $msg="Please Select Only jpg,jpeg and png format";
+    }
      if($msg==''){
         if($isset($_GET['id']) && ($isset($_GET['id'])!='')){
-            mysqli_query($con,"update product set categories_id = '$categories_id',name ='$name',
-            mrp ='$mrp',price ='$price,short_desc='$short_desc',desc ='$desc',meta_title='$meta_title',meta_desc ='$meta_desc',
-           meta_keyword ='$meta_keyword' where id='$id'");
+            if($_FILES['imaage']['name']!=''){
+                $image=rand(111111111,999999999).'_'.$_FILES['imaage']['name'];
+                move_uploaded_file($_FILES['image']['tmp_name'],'../media/product/'.$image);
+                $update_sql="update product set categories_id = '$categories_id',name ='$name',
+                mrp ='$mrp',price ='$price,short_desc='$short_desc',desc ='$desc',meta_title='$meta_title',meta_desc ='$meta_desc',
+               meta_keyword ='$meta_keyword',image = '$image' where id='$id'";
+            }
+            else{
+                move_uploaded_file($_FILES['image']['tmp_name'],'PRODUCT_IMAGE_SERVER_PATH'.$image);
+                $update_sql="update product set categories_id = '$categories_id',name ='$name',
+                mrp ='$mrp',price ='$price,short_desc='$short_desc',desc ='$desc',meta_title='$meta_title',meta_desc ='$meta_desc',
+               meta_keyword ='$meta_keyword' where id='$id'";
+            }
+            mysqli_query($con,update_sql);
         }else{
-            $image=rand(111111111,999999999).'_'.$FILES['imaage']['name'];
-            move_uploaded_file($_FILES['image']['tmp_name'],'../media/product/'.$image);
+            $image=rand(111111111,999999999).'_'.$_FILES['imaage']['name'];
+            move_uploaded_file($_FILES['image']['tmp_name'],'PRODUCT_IMAGE_SERVER_PATH'.$image);
 
             mysqli_query($con,"insert into product (categories_id,name,mrp,price,qty
             ,short_desciption,desciption,meta_title,meta_desc,meta_keyword,status,image)
@@ -141,7 +154,7 @@ if($isset($_POST['submit'])){
                            <textarea name="meta_keyword" id="product" placeholder="Please Enter Product's meta keyword !" 
                            class="form-control" ><?php echo $meta_keyword?>></textarea>
                             </div>
-                            
+
                                <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
                                <span id="payment-button-amount">Submit</span>
                                </button>
