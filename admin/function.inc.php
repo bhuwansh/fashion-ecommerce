@@ -9,9 +9,10 @@ function prx($arr) {
     print_r($arr);
     die();
 }
-function get_safe_value($str){
-    if($str!=''){
-        $str=trim($str);
-    return mysqli_real_escape_string($con,$str);
-    }
+
+
+// function.inc.php
+function get_safe_value($con, $str) {
+    // Sanitize and escape the string before returning it
+    return mysqli_real_escape_string($con, trim($str));
 }

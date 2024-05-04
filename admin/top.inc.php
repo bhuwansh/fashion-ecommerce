@@ -1,6 +1,6 @@
 <?php
-required('connection.inc.php');
-required('function.inc.php');
+require('connection.inc.php');
+require('function.inc.php');
 
 if(isset($_SESSION['ADMIN_LOGIN']) && $SESSION['ADMIN_LOGIN']!=''){
 }else{
