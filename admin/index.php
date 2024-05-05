@@ -1,4 +1,4 @@
-<?php require('top.php')?>
+<?php require('top.inc.php')?>
 <div class="body__overlay"></div>
 
 <div class="slider__container slider--one bg__cat--3">
@@ -134,7 +134,7 @@
                             <div class="category">
                                 <div class="ht__cat__thumb">
                                     <a href="product-details.html">
-                                        <img src="images/product/10.jpg" alt="product images">
+                                        <img src="images/product/1.jpg" alt="product images">
                                     </a>
                                 </div>
                                 <div class="fr__hover__info">
@@ -212,4 +212,4 @@
                 </div>
             </div>
         </section>
-        <?php require('footer.php')?>
+<?php require('footer.inc.php')?>

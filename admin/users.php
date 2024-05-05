@@ -40,7 +40,7 @@ $res=mysqli_query($con,$sql);
                                  <tbody>
                                     <?php
                                     $i=1;
-                                    while($row_mysqli_assoc($res)){ ?>
+                                    while($row=mysqli_fetch_assoc($res)){ ?>
                                     <tr>
                                        <td class="serial"><?php echo $i?></td>
                                         <td><?php echo $row['id']?></td>

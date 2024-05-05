@@ -41,7 +41,7 @@ $res=mysqli_query($con,$sql);
                                  <tbody>
                                     <?php
                                     $i=1;
-                                    while($row_mysqli_assoc($res)){ ?>
+                                    while($row=mysqli_fetch_assoc($res)){ ?>
                                     <tr>
                                        <td class="serial"><?php echo $i?></td>
                                         <td><?php echo $row['id']?></td>
@@ -51,8 +51,8 @@ $res=mysqli_query($con,$sql);
                                         <td><?php echo $row['comment']?></td>
                                         <td><?php echo $row['added_on']?></td>
                                         <td>
-                                            echo "<span class='badge badge-delete'><a href='?type=delete&id=".$row['id']."'>Delete</a></span>"; 
-                                             ?>
+                                            <span class='badge badge-delete'><a href='?type=delete&id=".$row['id']."'>Delete</a></span> 
+                                             
                                         </td>
                                     </tr>
                                   <?php } ?>

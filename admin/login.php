@@ -1,40 +1,28 @@
 <?php
-session_start(); // Initialize session handling
+// Initialize session handling
 require('connection.inc.php');
 require('function.inc.php');
 
 $msg = "";
 
 if (isset($_POST['submit'])) {
-    // Get username and password from POST data
-    $username = get_safe_value($con, $_POST['username']);
-    $password = get_safe_value($con, $_POST['password']);
+    $username=get_safe_value($con,$_POST['username']);
+    $password=get_safe_value($con,$_POST['password']);
+    $sql="select * from admin_users where username='$username' and password='$password'";
+    $res=mysqli_query($con,$sql);
 
-    // SQL query using prepared statement to check if username and password match
-    $stmt = $con->prepare("SELECT * FROM admin_users WHERE username=? AND password=?");
-    $stmt->bind_param("ss", $username, $password);
-    $stmt->execute();
-    $res = $stmt->get_result();
 
-    // Check if the query was executed successfully
-    if ($res) {
-        // Count the number of rows returned
-        $count = mysqli_num_rows($res);
 
-        // Check if username and password match
-        if ($count > 0) {
-            // If match, set session variables and redirect to categories.php
-            $_SESSION['ADMIN_LOGIN'] = 'yes';
-            $_SESSION['ADMIN_USERNAME'] = $username;
-            header('location: index.php');
-            exit(); // Terminate script after redirection
-        } else {
-            // If no match, display error message
-            $msg = "Please Enter Correct Login Details";
-        }
-    } else {
-        // If query execution failed, display error message
-        $msg = "Query failed: " . mysqli_error($con);
+    $count=mysqli_num_rows($res);
+    echo($count);
+    if($count>0)
+    {
+       $SESSION['ADMIN_LOGIN']='yes';
+       $SESSION['ADMIN_USERNAME']=$username;
+       header('location:categories.php');
+       die();
+    }else{
+       $msg="Please Enter Correct Login Details";
     }
 }
 ?>
@@ -46,9 +34,16 @@ if (isset($_POST['submit'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Login Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="assets/css/normalize.css">
-    <!-- Add other CSS files -->
-</head>
+      <link rel="stylesheet" href="assets/css/normalize.css">
+      <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+      <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+      <link rel="stylesheet" href="assets/css/themify-icons.css">
+      <link rel="stylesheet" href="assets/css/pe-icon-7-filled.css">
+      <link rel="stylesheet" href="assets/css/flag-icon.min.css">
+      <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
+      <link rel="stylesheet" href="assets/css/style.css">
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+   </head>
 <body class="bg-dark">
     <div class="sufee-login d-flex align-content-center flex-wrap">
         <div class="container">
@@ -71,7 +66,10 @@ if (isset($_POST['submit'])) {
             </div>
         </div>
     </div>
-    <!-- Add script includes -->
-</body>
+    <script src="assets/js/vendor/jquery-2.1.4.min.js" type="text/javascript"></script>
+      <script src="assets/js/popper.min.js" type="text/javascript"></script>
+      <script src="assets/js/plugins.js" type="text/javascript"></script>
+      <script src="assets/js/main.js" type="text/javascript"></script>
+   </body>
 </html>
 

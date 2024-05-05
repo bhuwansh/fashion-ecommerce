@@ -1,10 +1,19 @@
 <?php
 require('connection.inc.php');
-$cat_res=mysqli_query($con,"select * from categories where status=1 order by asc");
-$cat_arr=array();
-while($row=mysqli_fetch_assoc($cat_res)){
-    $cat_arr[]=$row;
+require('function.inc.php');
+$cat_res = mysqli_query($con, "SELECT * FROM categories WHERE status = 1 ORDER BY id ASC");
+
+if (!$cat_res) {
+    die('Error: ' . mysqli_error($con));
 }
+
+$cat_arr = array();
+
+while ($row = mysqli_fetch_assoc($cat_res)) {
+   $cat_arr[] = $row;
+}
+
+
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -56,7 +65,7 @@ while($row=mysqli_fetch_assoc($cat_res)){
                         <div class="menumenu__container clearfix">
                             <div class="col-lg-2 col-md-2 col-sm-3 col-xs-5">
                                 <div class="logo">
-                                    <a href="index.php"><img src="images/logo/4.png" alt="logo images"></a>
+                                    <a href="index.php"><img src="images/logo/logo.png" alt="logo images"></a>
                                 </div>
                             </div>
                             <div class="col-md-7 col-lg-8 col-sm-5 col-xs-3">
@@ -66,8 +75,11 @@ while($row=mysqli_fetch_assoc($cat_res)){
                                         <?php
                                         foreach($cat_arr as $list){
                                         ?>
-                                        <li><a href="categories.php?id=<?php echo $list['categories']?>"
-                                        <?php echo $list['categories']?></a></li>
+                                        <li>
+                                            <a href="categories.php?id=<?php echo $list['id'];?>">
+                                                    <?php echo $list['categories'] ?>
+                                                </a>
+                                        </li>
                                         <?php
                                         }
                                         ?>
@@ -82,7 +94,7 @@ while($row=mysqli_fetch_assoc($cat_res)){
                                             <?php
                                             foreach($cat_arr as $list){
                                             ?>
-                                            <li><a href="categories.php?id=<?php echo $list['categories']?>"
+                                            <li><a href="categories.php?id=<?php echo $list['id']?>"
                                             <?php echo $list['categories']?></a></li>
                                             <?php
                                             }?>

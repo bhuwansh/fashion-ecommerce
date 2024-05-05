@@ -15,7 +15,11 @@ $meta_keyword='';
 $msg='';
 $image_required='required';
 
-if($isset($_GET['id']) && ($isset($_GET['id'])!='')){
+
+
+
+
+if(isset($_GET['id']) && (isset($_GET['id'])!='')){
     $image_required='';
     $id=get_safe_value($con,$_GET['id']);
     $res=mysqli_query($con,"select * from product where id='$id'");
@@ -33,16 +37,18 @@ if($isset($_GET['id']) && ($isset($_GET['id'])!='')){
     $meta_desc=$row['meta_desc'];
     $meta_keyword=$row['meta_keyword'];
     }else{
-        header(location:product.php);
+        header('location:product.php');
         die();
     }
 }
 
-if($isset($_POST['submit'])){
-    $categories_id=get_safe_value($con,$_POST['categories_id']);
+if(isset($_POST['submit']))
+{
+ $categories_id=get_safe_value($con,$_POST['categories_id']);
     $name=get_safe_value($con,$_POST['name']);
-    $mrpt=get_safe_value($con,$_POST['mrp']);
+    $mrp=get_safe_value($con,$_POST['mrp']);
     $price=get_safe_value($con,$_POST['price']);
+    $image=get_safe_value($con,$_POST['img']);
     $qty=get_safe_value($con,$_POST['qty']);
     $short_desc=get_safe_value($con,$_POST['short_desc']);
     $description=get_safe_value($con,$_POST['description']);
@@ -50,53 +56,75 @@ if($isset($_POST['submit'])){
     $meta_desc=get_safe_value($con,$_POST['meta_desc']);
     $meta_keyword=get_safe_value($con,$_POST['meta_keyword']);
 
-    $res=mysqli_query($con,"select * from product where name='$name'");
-    $row=mysqli_fetch_assoc($res);
-    if($check>0){
-        if(isset($_GET['id']) && $_GET['id']!=''){
-         $getData=mysqli_fetch_assoc($res);
-         if($id==$getData['id']){
+   move_uploaded_file($_FILES['image']['name'],'PRODUCT_IMAGE_SERVER_PATH'.$image);
 
-        }else{
-             $msg="Product Already Exist";
-        }
-            }else{
-               $msg="Product Already Exist";   
-        }
-    }
-    if($_FILES['image']['type']!='' && ($_FILES['image']['type']!='image/png') || 
-    ($_FILES['image']['type']!='image/jpg') || ($_FILES['image']['type']!='image/jpeg'){
-        $msg="Please Select Only jpg,jpeg and png format";
-    }
-     if($msg==''){
-        if($isset($_GET['id']) && ($isset($_GET['id'])!='')){
-            if($_FILES['imaage']['name']!=''){
-                $image=rand(111111111,999999999).'_'.$_FILES['imaage']['name'];
-                move_uploaded_file($_FILES['image']['tmp_name'],'../media/product/'.$image);
-                $update_sql="update product set categories_id = '$categories_id',name ='$name',
-                mrp ='$mrp',price ='$price,short_desc='$short_desc',desc ='$desc',meta_title='$meta_title',meta_desc ='$meta_desc',
-               meta_keyword ='$meta_keyword',image = '$image' where id='$id'";
-            }
-            else{
-                move_uploaded_file($_FILES['image']['tmp_name'],'PRODUCT_IMAGE_SERVER_PATH'.$image);
-                $update_sql="update product set categories_id = '$categories_id',name ='$name',
-                mrp ='$mrp',price ='$price,short_desc='$short_desc',desc ='$desc',meta_title='$meta_title',meta_desc ='$meta_desc',
-               meta_keyword ='$meta_keyword' where id='$id'";
-            }
-            mysqli_query($con,update_sql);
-        }else{
-            $image=rand(111111111,999999999).'_'.$_FILES['imaage']['name'];
-            move_uploaded_file($_FILES['image']['tmp_name'],'PRODUCT_IMAGE_SERVER_PATH'.$image);
+    mysqli_query($con,"insert into products (categories_id,name,mrp,price,qty,image,
+    ,short_desc,description,meta_title,meta_desc,meta_keyword,status)
+      values(2,'$name','$mrp','$price','$qty','$image','$short_description','$description',
+      '$meta_title','$meta_desc','$meta_keyword',1)");
+     
+         header('location:product.php');
+die();
 
-            mysqli_query($con,"insert into product (categories_id,name,mrp,price,qty
-            ,short_desciption,desciption,meta_title,meta_desc,meta_keyword,status,image)
-              values('$categories_id','$name','$mrp','$price','$qty'
-            ,'$short_desciption','$desciption','$meta_title','$meta_desc','$meta_keyword',1,'$image')");
-             }
-        header('location:product.php');
-        die();
+    // $categories_id=get_safe_value($con,$_POST['categories_id']);
+    // $name=get_safe_value($con,$_POST['name']);
+    // $mrpt=get_safe_value($con,$_POST['mrp']);
+    // $price=get_safe_value($con,$_POST['price']);
+    // $qty=get_safe_value($con,$_POST['qty']);
+    // $short_desc=get_safe_value($con,$_POST['short_desc']);
+    // $description=get_safe_value($con,$_POST['description']);
+    // $meta_title=get_safe_value($con,$_POST['meta_title']);
+    // $meta_desc=get_safe_value($con,$_POST['meta_desc']);
+    // $meta_keyword=get_safe_value($con,$_POST['meta_keyword']);
+
+    // $res=mysqli_query($con,"select * from product where name='$name'");
+    // $row=mysqli_fetch_assoc($res);
+    // if($check>0){
+    //     if(isset($_GET['id']) && $_GET['id']!=''){
+    //      $getData=mysqli_fetch_assoc($res);
+    //      if($id==$getData['id']){
+
+    //     }else{
+    //          $msg="Product Already Exist";
+    //     }
+    //         }else{
+    //            $msg="Product Already Exist";   
+    //     }
+    // }
+    // if(($_FILES['image']['type']!='') && ($_FILES['image']['type']!='image/png') || 
+    // ($_FILES['image']['type']!='image/jpg') || ($_FILES['image']['type']!='image/jpeg'))
+    // {
+    //     $msg="Please Select Only jpg,jpeg and png format";
+    // }
+    //  if($msg==''){
+    //     if(isset($_GET['id']) && (isset($_GET['id'])!='')){
+    //         if($_FILES['image']['name']!=''){
+    //             $image=rand(111111111,999999999).'_'.$_FILES['image']['name'];
+    //             move_uploaded_file($_FILES['image']['tmp_name'],'PRODUCT_IMAGE_SERVER_PATH'.$image);
+    //             $update_sql="update product set categories_id = 2,name ='$name',
+    //             mrp ='$mrp',price ='$price,short_desc='$short_desc',desc ='$desc',meta_title='$meta_title',meta_desc ='$meta_desc',
+    //            meta_keyword ='$meta_keyword',image = '$image' where id='$id'";
+    //         }
+    //         else{
+    //             move_uploaded_file($_FILES['image']['tmp_name'],'PRODUCT_IMAGE_SERVER_PATH'.$image);
+    //             $update_sql="update product set categories_id = 2,name ='$name',
+    //             mrp ='$mrp',price ='$price,short_desc='$short_desc',desc ='$desc',meta_title='$meta_title',meta_desc ='$meta_desc',
+    //            meta_keyword ='$meta_keyword' where id='$id'";
+    //         }
+    //         mysqli_query($con,update_sql);
+    //     }else{
+    //         $image=rand(111111111,999999999).'_'.$_FILES['imaage']['name'];
+    //         move_uploaded_file($_FILES['image']['tmp_name'],'PRODUCT_IMAGE_SERVER_PATH'.$image);
+
+    //         mysqli_query($con,"insert into product (categories_id,name,mrp,price,qty
+    //         ,short_desciption,desciption,meta_title,meta_desc,meta_keyword,status,image)
+    //           values(2,'$name','$mrp','$price','$qty'
+    //         ,'$short_desciption','$desciption','$meta_title','$meta_desc','$meta_keyword',1,'$image')");
+    //          }
+    //     header('location:product.php');
+    //     die();
+    // }
     }
-}       
 ?>
 <div class="content pb-0">
             <div class="animated fadeIn">
@@ -104,55 +132,75 @@ if($isset($_POST['submit'])){
                   <div class="col-lg-12">
                      <div class="card">
                         <div class="card-header"><strong>Product</strong><small> Form</small></div>
+
+                     
+
+
                         <form method="post" enctype="multipart/form-data">
                          <div class="card-body card-block">
                            <div class="form-group">
-                           <label for="categories" class=" form-control-label">Product Name</label><input type="text" 
-                           name="name" id="product" placeholder="Enter product name" class="form-control"
+                           <label class=" form-control-label">Product Name</label><input type="text" 
+                           name="name" id="name" placeholder="Enter product name" class="form-control"
                             required value=<?php echo $name?>>
                             </div>
                             <div class="form-group">
-                           <label for="categories" class=" form-control-label">MRP</label><input type="text" 
-                           name="mrp" id="product" placeholder="Enter product mrp" class="form-control" 
+                            <select class="form-select" aria-label="Default select example">
+
+  <option selected>Select categories</option>
+  <?php
+
+$get_cat = get_categories($con);
+foreach ($get_cat as $list) {
+?>
+  <option name="categories_id" id="categories_id"  value='<?php echo $list['categories_id'] ?>'  >  <?php echo $list['categories'] ?></option>
+ 
+  <?php
+                            }
+                            ?>
+</select>
+                        </div>      
+                            <div class="form-group">
+                           <label class=" form-control-label">MRP</label><input type="text" 
+                           name="mrp" id="mrp" placeholder="Enter product mrp" class="form-control" 
                            required value=<?php echo $mrp?>>
                             </div>
                             <div class="form-group">
-                           <label for="categories" class=" form-control-label">Price</label><input type="text" 
-                           name="price" id="product" placeholder="Enter product price" class="form-control" 
+                           <label class=" form-control-label">Price</label><input type="text" 
+                           name="price" id="price" placeholder="Enter product price" class="form-control" 
                           required value=<?php echo $price?>>
                             </div>
                             <div class="form-group">
-                           <label for="categories" class=" form-control-label">Qty</label><input type="text" 
-                           name="qty" id="product"  class="form-control" required> 
+                           <label class=" form-control-label">Qty</label><input type="text" 
+                           name="qty" id="qty"  class="form-control" placeholder="Enter quantity" required> 
                             </div>
                             <div class="form-group">
-                           <label for="categories" class=" form-control-label">Image</label><input type="file" 
-                           name="image" id="product" placeholder="Enter product name" class="form-control" <?php echo $image_required?>>
+                           <label class=" form-control-label">Image</label><input type="file" 
+                           name="img" id="img" placeholder="Enter product name" class="form-control" <?php echo $image_required?>>
                             </div>
                             <div class="form-group">
-                           <label for="categories" class=" form-control-label">Short Description</label>
-                           <textarea name="short_desc" id="product" placeholder="Please Enter Product's Short Desciption!" 
-                           class="form-control" required><?php echo $short_desc?>></textarea>
+                           <label class=" form-control-label">Short Description</label>
+                           <textarea name="short_desc" id="short_desc" placeholder="Please Enter Product's Short Desciption!" 
+                           class="form-control" required><?php echo $short_desc?></textarea>
 
                            <div class="form-group">
-                           <label for="categories" class=" form-control-label">Description</label>
-                           <textarea name="description" id="product" placeholder="Please Enter Product's Desciption!" 
-                           class="form-control" required><?php echo $description?>></textarea>
+                           <label class=" form-control-label">Description</label>
+                           <textarea name="description" id="description" placeholder="Please Enter Product's Desciption!" 
+                           class="form-control" required><?php echo $description?></textarea>
                             </div>
                             <div class="form-group">
-                           <label for="categories" class=" form-control-label">Meta Title</label>
-                           <textarea name="meta_title" id="product" placeholder="Please Enter Product's meta title!" 
-                           class="form-control" ><?php echo $meta_title?>></textarea>
+                           <label class=" form-control-label">Meta Title</label>
+                           <textarea name="meta_title" id="meta_title" placeholder="Please Enter Product's meta title!" 
+                           class="form-control" ><?php echo $meta_title?></textarea>
                             </div>
                             <div class="form-group">
-                           <label for="categories" class=" form-control-label">Meta Description</label>
-                           <textarea name="meta_desc" id="product" placeholder="Please Enter Product's Meta Desciption!" 
-                           class="form-control" ><?php echo $meta_desc?>></textarea>
+                           <label class=" form-control-label">Meta Description</label>
+                           <textarea name="meta_desc" id="meta_desc" placeholder="Please Enter Product's Meta Desciption!" 
+                           class="form-control" ><?php echo $meta_desc?></textarea>
                             </div>
                             <div class="form-group">
-                           <label for="categories" class=" form-control-label">Meta Keyword</label>
-                           <textarea name="meta_keyword" id="product" placeholder="Please Enter Product's meta keyword !" 
-                           class="form-control" ><?php echo $meta_keyword?>></textarea>
+                           <label class=" form-control-label">Meta Keyword</label>
+                           <textarea name="meta_keyword" id="meta_keyword" placeholder="Please Enter Product's meta keyword !" 
+                           class="form-control" ><?php echo $meta_keyword?></textarea>
                             </div>
 
                                <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">

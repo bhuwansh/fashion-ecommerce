@@ -18,6 +18,6 @@ define('SERVER_PATH','http://localhost/fashion-ecommerce/admin/');
 define('SITE_PATH','http://localhost/fashion-ecommerce/ecommerce-frontend/');
 // define('SITE_PATH','');
 
-define('PRODUCT_IMAGE_SERVER_PATH','http://localhost/fashion-ecommerce/ecommerce-frontend/images/product/');
-define('PRODUCT_IMAGE_SITE_PATH','http://localhost/fashion-ecommerce/ecommerce-frontend/images/product/');
+define('PRODUCT_IMAGE_SERVER_PATH','http://localhost/fashion-ecommerce/admin/images/products/');
+define('PRODUCT_IMAGE_SITE_PATH',  'http://localhost/fashion-ecommerce/ecommerce-frontend/images/product/');
 ?>
