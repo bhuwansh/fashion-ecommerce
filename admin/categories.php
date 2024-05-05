@@ -21,7 +21,7 @@ if(isset($_GET['type']) && $_GET['type']!=''){
     }    
   }      
 
-  $sql = "SELECT * FROM categories ORDER BY category ASC";
+  $sql = "SELECT * FROM categories ORDER BY categories ASC";
   $res = mysqli_query($con, $sql);
 ?>  
 <div class="content pb-0">
@@ -45,31 +45,39 @@ if(isset($_GET['type']) && $_GET['type']!=''){
                                         </tr>
                                  </thead>
                                  <tbody>
-                                    <?php
+                                 <?php
+                                 if($res){
                                     $i=1;
-                                    while($row=mysqli_fetch_assoc($res)){ ?>
+                                    while($row=mysqli_fetch_assoc($res)){ 
+                                    ?>
                                     <tr>
-                                       <td class="serial"><?php echo $i?></td>
-                                        <td><?php echo $row['id']?></td>
-                                        <td><?php echo $row['categories']?></td>
-                                        <td><?php echo $row['status']?></td>
-                                        <td>
-                                            <?php
-                                            if($row['status']==1) {
+                                       <td class="serial"><?php echo $i ?></td>
+                                       <td><?php echo $row['id'] ?></td>
+                                       <td><?php echo $row['categories'] ?></td>
+                                       <td><?php echo $row['status'] ?></td>
+                                       <td>
+                                          <?php
+                                          if($row['status'] == 1) {
                                                 echo "<span class='badge badge-complete'>
-                                                <a href='?type=status&operation=deactive&id=".$row['id']."'>
-                                                Active</a></span>&nbsp;";
-                                            }else{
+                                                <a href='?type=status&operation=deactive&id=".$row['id']."'>Active</a></span>&nbsp;";
+                                          } else {
                                                 echo "<span class='badge badge-pending'>
-                                                <a href='?type=status&operation=Active&id=".$row['id']."'>
-                                                Deactive</a></span>&nbsp;";
-                                            }
-                                            echo "<span class='badge badge-edit'><a href='manage_categories.php?id=".$row['id']."'>Edit</a></span>&nbsp;"; 
-                                            echo "<span class='badge badge-delete'><a href='?type=delete&id=".$row['id']."'>Delete</a></span>"; 
-                                             ?>
-                                        </td>
+                                                <a href='?type=status&operation=active&id=".$row['id']."'>Deactive</a></span>&nbsp;";
+                                          }
+                                          ?>
+                                          <span class='badge badge-edit'><a href='manage_categories.php?id=<?php echo $row['id'] ?>'>Edit</a></span>&nbsp;
+                                          <span class='badge badge-delete'><a href='?type=delete&id=<?php echo $row['id'] ?>'>Delete</a></span>
+                                       </td>
                                     </tr>
-                                  <?php } ?>
+                                    <?php
+                                    $i++;
+                                    }
+                                 } else {
+                                    // Handle the case where the query fails
+                                    echo "Error executing query: " . mysqli_error($con); // Assuming $conn is your database connection
+                                }
+                                    ?>
+
                               </tbody>
                             </table>
                            </div>

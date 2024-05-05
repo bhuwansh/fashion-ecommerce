@@ -21,8 +21,10 @@ if(isset($_GET['type']) && $_GET['type']!=''){
       }    
   }      
 
-$sql="select product.*, categories.category from products INNER JOIN categories ON product.categories_id=
-categories.id order by product.id asc";
+  $sql = "SELECT product.*, categories.category FROM products 
+  INNER JOIN categories ON product.categories_id = categories.id 
+  ORDER BY product.id ASC";
+
 $res=mysqli_query($con,$sql);
 ?>
 <div class="content pb-0">
@@ -52,34 +54,39 @@ $res=mysqli_query($con,$sql);
                                  </thead>
                                  <tbody>
                                     <?php
-                                    $i=1;
-                                    while($row=mysqli_fetch_assoc($res)){ ?>
-                                    <tr>
-                                       <td class="serial"><?php echo $i?></td>
-                                        <td><?php echo $row['id']?></td>
-                                        <td><?php echo $row['categories_id']?></td>
-                                        <td><?php echo $row['name']?></td>
-                                        <td><img src=" <?php echo PRODUCT_IMAGE_SERVER_PATH.$row['image']?>"/></td>
-                                        <td><?php echo $row['mrp']?></td>
-                                        <td><?php echo $row['price']?></td>
-                                        <td><?php echo $row['qty']?></td>
-                                        <td>
-                                            <?php
-                                            if($row['status']==1) {
-                                                echo "<span class='badge badge-complete'>
-                                                <a href='?type=status&peration=deactive&id=".$row['id']."'>
-                                                Active</a></span>&nbsp;";
-                                            }else{
-                                                echo "<span class='badge badge-pending'>
-                                                <a href='?type=status&peration=Active&id=".$row['id']."'>
-                                                Deactive</a></span>&nbsp;";
-                                            }
-                                            echo "<span class='badge badge-edit'><a href='manage_product.php?id=".$row['id']."'>Edit</a></span>&nbsp;"; 
-                                            echo "<span class='badge badge-delete'><a href='?type=delete&id=".$row['id']."'>Delete</a></span>"; 
-                                             ?>
-                                        </td>
-                                    </tr>
-                                  <?php } ?>
+                                    if($res) {
+                                       $i = 1;
+                                       while ($row = mysqli_fetch_assoc($res)) { 
+                                       ?>
+                                       <tr>
+                                           <td class="serial"><?php echo $i ?></td>
+                                           <td><?php echo $row['id'] ?></td>
+                                           <td><?php echo $row['categories_id'] ?></td>
+                                           <td><?php echo $row['name'] ?></td>
+                                           <td><img src="<?php echo PRODUCT_IMAGE_SERVER_PATH.$row['image'] ?>" /></td>
+                                           <td><?php echo $row['mrp'] ?></td>
+                                           <td><?php echo $row['price'] ?></td>
+                                           <td><?php echo $row['qty'] ?></td>
+                                           <td>
+                                               <?php
+                                               if ($row['status'] == 1) {
+                                                   echo "<span class='badge badge-complete'>
+                                                   <a href='?type=status&operation=deactive&id=".$row['id']."'>Active</a></span>&nbsp;";
+                                               } else {
+                                                   echo "<span class='badge badge-pending'>
+                                                   <a href='?type=status&operation=active&id=".$row['id']."'>Deactive</a></span>&nbsp;";
+                                               }
+                                               echo "<span class='badge badge-edit'><a href='manage_product.php?id=".$row['id']."'>Edit</a></span>&nbsp;"; 
+                                               echo "<span class='badge badge-delete'><a href='?type=delete&id=".$row['id']."'>Delete</a></span>"; 
+                                               ?>
+                                           </td>
+                                       </tr>
+                                       <?php
+                                       $i++;
+                                       }
+                                    } 
+                                       ?>
+                                       
                               </tbody>
                             </table>
                            </div>
