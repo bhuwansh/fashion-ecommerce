@@ -36,7 +36,8 @@ function get_categories($con) {
 }
 
 // get products list
-function get_products($con, $type = '', $limit = '', $cat_id = '') {
+function get_products($con, $type = '', $limit = '', $cat_id = '') 
+{
     $data = array();
     $sql = "SELECT * FROM products WHERE status = 1";
 
@@ -86,4 +87,8 @@ function get_product_details($con, $prod_id = '') {
 
     return $data;
 }
+
 ?>
+
+
+
