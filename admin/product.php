@@ -2,10 +2,10 @@
 require('top.inc.php');
 
 if(isset($_GET['type']) && $_GET['type']!=''){
-  $type=get_safe_value($con,$_GET['type']);
+  $type = mysqli_real_escape_string($con,$_GET['type']);
   if($type == 'status'){
-    $operation=get_safe_value($con,$_GET['operation']);
-    $id=get_safe_value($con,$_GET['id']);
+    $operation = mysqli_real_escape_string($con,$_GET['operation']);
+    $id = mysqli_real_escape_string($con,$_GET['id']);
     if($operation=='active'){
         $status='1';
     }else{
@@ -14,16 +14,16 @@ if(isset($_GET['type']) && $_GET['type']!=''){
     $update_status_sql="update product set status='$status' where id='$id'";
     mysqli_query($con,$update_status_sql);
    }
-    elseif($type=='delete'){
-      $id=get_safe_value($con,$_GET['id']);
-      $delete_sql="Delete from product where id='$id'";
+    elseif($type == 'delete'){
+      $id = mysqli_real_escape_string($con,$_GET['id']);
+      $delete_sql = "Delete from product where id='$id'";
       mysqli_query($con,$delete_sql);
       }    
   }      
 
-  $sql = "SELECT product.*, categories.category FROM products 
-  INNER JOIN categories ON product.categories_id = categories.id 
-  ORDER BY product.id ASC";
+  $sql = "SELECT products.*, categories.categories AS name FROM products 
+  INNER JOIN categories ON products.categories_id = categories.categories 
+  ORDER BY products.id ASC";
 
 $res=mysqli_query($con,$sql);
 ?>
@@ -63,7 +63,7 @@ $res=mysqli_query($con,$sql);
                                            <td><?php echo $row['id'] ?></td>
                                            <td><?php echo $row['categories_id'] ?></td>
                                            <td><?php echo $row['name'] ?></td>
-                                           <td><img src="<?php echo PRODUCT_IMAGE_SERVER_PATH.$row['image'] ?>" /></td>
+                                           <td><img src="<?php echo 'PRODUCT_IMAGE_SERVER_PATH' .$row['image'] ?>" /></td>
                                            <td><?php echo $row['mrp'] ?></td>
                                            <td><?php echo $row['price'] ?></td>
                                            <td><?php echo $row['qty'] ?></td>
@@ -82,7 +82,6 @@ $res=mysqli_query($con,$sql);
                                            </td>
                                        </tr>
                                        <?php
-                                       $i++;
                                        }
                                     } 
                                        ?>

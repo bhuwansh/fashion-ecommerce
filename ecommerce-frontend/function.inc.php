@@ -9,17 +9,17 @@ function prx($arr) {
     print_r($arr);
     die();
 }
-function get_product($con, $type = '', $limit = '', $cat = '') {
+function get_product($con, $type = '', $limit = '', $cat_id = '') {
     $data = array();
     $sql = "SELECT * FROM products WHERE status = 1";
 
-    if ($cat != '') {
-        $sql .= " and categories_id = $cat";
+    if ($cat_id != '') {
+        $sql .= " and categories_id = $cat_id";
+    }
+    if ($product_id != '') {
+        $sql .= " and id = $product_id";
     }
 
-    if ($type == 'latest') {
-        $sql .= " ORDER BY id DESC";
-    }
     if ($limit != '') {
         $sql .= " LIMIT $limit";
     }
