@@ -21,11 +21,13 @@ if(isset($_GET['type']) && $_GET['type']!=''){
       }    
   }      
 
-  $sql = "SELECT products.*, categories.categories AS name FROM products 
-  INNER JOIN categories ON products.categories_id = categories.categories 
-  ORDER BY products.id ASC";
+//   $sql = "SELECT products.*, categories.categories AS name FROM products 
+//   INNER JOIN categories ON products.categories_id = categories.categories 
+//   ORDER BY products.id ASC";
 
-$res=mysqli_query($con,$sql);
+$product_list=get_product_list($con);
+
+// prx($res);
 ?>
 <div class="content pb-0">
             <div class="orders">
@@ -41,29 +43,29 @@ $res=mysqli_query($con,$sql);
                               <table class="table ">
                                  <thead>
                                     <tr>
-                                       <th class="serial">#</th>
-                                       <th>ID</th>
-                                       <th>Category</th>
+                                    <th class="serial">#</th>
+                                       <!-- <th>ID</th> -->
                                        <th>Name</th>
+                                       <th>Category</th>
                                        <th>Image</th>
                                        <th>MRP</th>
                                        <th>Price</th>
                                        <th>Qty</th>
-                                       <th></th>
+                                       <th>####</th>
                                         </tr>
                                  </thead>
                                  <tbody>
                                     <?php
-                                    if($res) {
+                                    if($product_list) {
                                        $i = 1;
-                                       while ($row = mysqli_fetch_assoc($res)) { 
+                                       foreach ($product_list as $row) {
                                        ?>
                                        <tr>
                                            <td class="serial"><?php echo $i ?></td>
-                                           <td><?php echo $row['id'] ?></td>
-                                           <td><?php echo $row['categories_id'] ?></td>
+                                           <!-- <td><?php echo $row['id'] ?></td> -->
                                            <td><?php echo $row['name'] ?></td>
-                                           <td><img src="<?php echo 'PRODUCT_IMAGE_SERVER_PATH' .$row['image'] ?>" /></td>
+                                           <td><?php echo $row['cat_name'] ?></td>
+                                           <td><img src="<?php echo PRODUCT_IMAGE_SERVER_PATH .$row['image'] ?>" /></td>
                                            <td><?php echo $row['mrp'] ?></td>
                                            <td><?php echo $row['price'] ?></td>
                                            <td><?php echo $row['qty'] ?></td>
@@ -81,7 +83,10 @@ $res=mysqli_query($con,$sql);
                                                ?>
                                            </td>
                                        </tr>
+                                        
+
                                        <?php
+                                         $i++;
                                        }
                                     } 
                                        ?>
