@@ -1,18 +1,8 @@
 <?php
 require('connection.inc.php');
 require('function.inc.php');
-$cat_res = mysqli_query($con, "SELECT * FROM categories WHERE status = 1 ORDER BY id ASC");
 
-if (!$cat_res) {
-    die('Error: ' . mysqli_error($con));
-}
-
-$cat_arr = array();
-
-while ($row = mysqli_fetch_assoc($cat_res)) {
-   $cat_arr[] = $row;
-}
-
+$cat_res = get_categories($con);
 
 ?>
 <!doctype html>
@@ -73,7 +63,7 @@ while ($row = mysqli_fetch_assoc($cat_res)) {
                                     <ul class="main__menu">
                                         <li class="drop"><a href="index.php">Home</a></li>
                                         <?php
-                                        foreach($cat_arr as $list){
+                                        foreach($cat_res as $list){
                                         ?>
                                         <li>
                                             <a href="categories.php?id=<?php echo $list['id'];?>">
@@ -92,7 +82,7 @@ while ($row = mysqli_fetch_assoc($cat_res)) {
                                         <ul>
                                             <li><a href="index.php">Home</a></li>
                                             <?php
-                                            foreach($cat_arr as $list){
+                                            foreach($cat_res as $list){
                                             ?>
                                             <li><a href="categories.php?id=<?php echo $list['id']?>"
                                             <?php echo $list['categories']?></a></li>

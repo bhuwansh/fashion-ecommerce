@@ -8,7 +8,10 @@
                     <div class="footer">
                         <h2 class="title__line--2">ABOUT US</h2>
                         <div class="ft__details">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim</p>
+                            <p>It is succinct yet detailed enough to showcase the platform’s value.
+                                 The top navigation lets users learn more about Upwork’s leaders and its latest news.
+                                  If you wish to position an executive of your organization as a thought leader,
+                                   adopting this approach could be beneficial by showcasing their voice on a key page.</p>
                             <div class="ft__social__link">
                                 <ul class="social__link">
                                     <li><a href="#"><i class="icon-social-twitter icons"></i></a></li>
@@ -95,7 +98,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="copyright__inner">
-                        <p>Copyright© <a href="https://freethemescloud.com/">Free themes Cloud</a> 2018. All right reserved.</p>
+                        <p>Copyright© <a href="https://freethemescloud.com/">Kritika Suthar</a> 2018. All right reserved.</p>
                         <a href="#"><img src="images/others/shape/paypol.png" alt="payment images"></a>
                     </div>
                 </div>

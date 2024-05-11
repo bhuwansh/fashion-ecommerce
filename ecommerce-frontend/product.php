@@ -1,10 +1,23 @@
-<div class="htc__product__container">
+<?php
+require('connection.inc.php');
+require('function.inc.php');
+?> 
+ 
+ <div class="htc__product__container">
                     <div class="row">
                         <div class="product__list clearfix mt--30">
                             <?php
                             // Assuming get_product function fetches products correctly
-                            $get_product = get_product($con, 'latest', 5 ,1);
-                            foreach ($get_product as $list) {
+                            $get_product = get_product($con,'','');
+                            // foreach($get_product as $list) {
+                                if (is_array($get_product) || is_object($get_product)) {
+                                    foreach ($get_product as $list) {
+                                        // Your foreach loop logic here
+                                    }
+                                } else {
+                                    // Handle the case where $get_product is neither an array nor an object
+                                    // You might want to log an error or take other appropriate action
+                                }
                             ?>
                                 <div class="col-md-4 col-lg-3 col-sm-4 col-xs-12">
                                     <div class="category">
@@ -24,7 +37,7 @@
                                     </div>
                                 </div>
                             <?php
-                            }
+                            // }
                             ?>
                         </div>
                     </div>
