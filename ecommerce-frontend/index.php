@@ -18,8 +18,8 @@
                             <div class="col-md-7 col-sm-7 col-xs-12 col-lg-6">
                                 <div class="slide">
                                     <div class="slider__inner">
-                                        <h2>collection 2018</h2>
-                                        <h1>NICE CHAIR</h1>
+                                        <h2>Collection 2024</h2>
+                                        <h1>ZARA TOP</h1>
                                         <div class="cr__btn">
                                             <a href="cart.html">Shop Now</a>
                                         </div>
@@ -42,7 +42,7 @@
                                 <div class="slide">
                                     <div class="slider__inner">
                                         <h2>Collection 2024</h2>
-                                        <h1>Zara top</h1>
+                                        <h1>ANARKALIS</h1>
                                         <div class="cr__btn">
                                             <a href="cart.html">Shop Now</a>
                                         </div>
@@ -51,7 +51,7 @@
                             </div>
                             <div class="col-lg-6 col-sm-5 col-xs-12 col-md-5">
                                 <div class="slide__thumb">
-                                    <img src="images/product/zara dress1.jpg" alt="slider images">
+                                    <img src="images/product/traditional (1).jpeg" alt="slider images">
                                 </div>
                             </div>
                         </div>
@@ -79,7 +79,7 @@
 
                         <?php
                             // Assuming get_product function fetches products correctly
-                             $get_products = get_products($con, '',50,'');
+                             $get_products = get_products($con, '',4,'');
                             foreach ($get_products as $list) {
                             ?>
                                 <div class="col-md-4 col-lg-3 col-sm-4 col-xs-12">
@@ -116,7 +116,7 @@
                     <div class="col-xs-12">
                         <div class="section__title--2 text-center">
                             <h2 class="title__line">Western wear</h2>
-                            <p>But I must explain to you how all this mistaken idea</p>
+                            
                         </div>
                     </div>
                 </div>
@@ -126,7 +126,7 @@
 
                         <?php
                             // Assuming get_product function fetches products correctly
-                             $get_w_products = get_products($con, '','','1');
+                             $get_w_products = get_products($con, '','4','1');
                             foreach ($get_w_products as $list) {
                             ?>
                                 <div class="col-md-4 col-lg-3 col-sm-4 col-xs-12">
@@ -162,8 +162,8 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="section__title--2 text-center">
-                            <h2 class="title__line">traditional</h2>
-                            <p>But I must explain to you how all this mistaken idea</p>
+                            <h2 class="title__line">Traditional Wear</h2>
+                            
                         </div>
                     </div>
                 </div>
@@ -173,7 +173,7 @@
 
                         <?php
                             // Assuming get_product function fetches products correctly
-                             $get_t_products = get_products($con, '','','2');
+                             $get_t_products = get_products($con, '','4','2');
                             foreach ($get_t_products as $list) {
                             ?>
                                 <div class="col-md-4 col-lg-3 col-sm-4 col-xs-12">

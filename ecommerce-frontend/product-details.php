@@ -4,7 +4,7 @@ $get_product = get_product_details($con,$product_id );
 
 // prx($get_product);
 ?>
- <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(images/bg/banner2.jpeg) no-repeat scroll center center / cover ;">
+ <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(images/bg/banner3.jpeg) no-repeat scroll center center / cover ;">
             <div class="ht__bradcaump__wrap">
                 <div class="container">
                     <div class="row">
@@ -51,10 +51,10 @@ $get_product = get_product_details($con,$product_id );
                             <div class="ht__product__dtl">
                                 <h2><?php echo $get_product['name'] ?></h2>
                                 <ul  class="pro__prize">
-                                    <li class="old__prize"> MRP : <?php echo $get_product['name'] ?></li>
-                                    <li>Price : <?php echo $get_product['name'] ?></li>
+                                    <li class="old__prize"> MRP : <?php echo $get_product['mrp'] ?></li>
+                                    <li>Price : <?php echo $get_product['price'] ?></li>
                                 </ul>
-                                <p class="pro__info">Short Description : <?php echo $get_product['name'] ?></p>
+                                <p class="pro__info">Short Description : <?php echo $get_product['short_desc'] ?></p>
                                 <div class="ht__pro__desc">
                                     <div class="sin__desc">
                                         <p><span>Availability:</span> In Stock</p>

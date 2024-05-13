@@ -1,16 +1,17 @@
 <?php
 require('top.inc.php');
-$categories_id='';
-$name='';
-$mrp='';
-$price='';
-$qty='';
-$image='';
-$short_desc='';
-$description='';
-$meta_title='';
-$meta_desc='';
-$meta_keyword='';
+
+$categories_id = '';
+$name = '';
+$mrp = '';
+$price = '';
+$qty = '';
+$image = '';
+$short_desc = '';
+$description = '';
+$meta_title = '';
+$meta_desc = '';
+$meta_keyword = '';
 
 $msg='';
 $image_required='required';
@@ -22,10 +23,15 @@ $image_required='required';
 if(isset($_GET['id']) && (isset($_GET['id'])!='')){
     $image_required='';
     $id=get_safe_value($con,$_GET['id']);
-    $res=mysqli_query($con,"select * from product where id='$id'");
-    $check=mysqli_num_rows($res);
-    if($check>0){
-     $row=mysqli_fetch_assoc($res);
+    $sql = "select * from products where id='$id'";
+    $res = mysqli_query($con, $sql);
+
+    if($res) {
+    $row = mysqli_num_rows($res);
+    if($row > 0){
+       $i=0;
+        while($row=mysqli_fetch_assoc($res)) {
+           
     $categories_id=$row['categories_id'];
     $name=$row['name'];
     $mrp=$row['mrp'];
@@ -37,19 +43,27 @@ if(isset($_GET['id']) && (isset($_GET['id'])!='')){
     $meta_title=$row['meta_title'];
     $meta_desc=$row['meta_desc'];
     $meta_keyword=$row['meta_keyword'];
+    $i++;
+        }
     }else{
         header('Location: product.php');
         die();
     }
+    } else {
+
+       echo "Error executing query: " . mysqli_error($con); // Assuming $conn is your database connection
+    }
 }
+
+
 
 if(isset($_POST['submit']))
 {
- $categories_id=get_safe_value($con,$_POST['categories_id']);
+    $categories_id=get_safe_value($con,$_POST['categories_id']);
     $name=get_safe_value($con,$_POST['name']);
     $mrp=get_safe_value($con,$_POST['mrp']);
     $price=get_safe_value($con,$_POST['price']);
-    // $image=get_safe_value($con,$_POST['img']);
+    // $image=get_safe_value($con,$_POST['image']);
     $qty=get_safe_value($con,$_POST['qty']);
     $short_desc=get_safe_value($con,$_POST['short_desc']);
     $description=get_safe_value($con,$_POST['description']);
@@ -57,10 +71,84 @@ if(isset($_POST['submit']))
     $meta_desc=get_safe_value($con,$_POST['meta_desc']);
     $meta_keyword=get_safe_value($con,$_POST['meta_keyword']);
 
+    $sql=  "SELECT * FROM products WHERE name='$name'";
+    $res = mysqli_query($con, $sql);
+    if($res) {
+    $row = mysqli_num_rows($res);
+    if ($row > 0) {
+        if (isset($_GET['id']) && $_GET['id'] != ''){
+            $getData=mysqli_fetch_assoc($res);
+            if($id==getData['id']){
+            }
+
+            }else{
+            $msg = "Product already exists";
+            }
+        }else{
+            echo "Error executing query: " . mysqli_error($con);
+        }
+    }
+}
+//      header('location:product.php');
+//  die();
+
+
+//   move_uploaded_file($_FILES['image']['name'],'PRODUCT_IMAGE_SERVER_PATH'.$image);
+
+if ($msg == '') {
+    if (isset($_GET['id']) && $_GET['id'] != '') {
+        // Update product
+        // $id = $_GET['id'];
+        // $image = ''; // Initialize image variable
+        // if ($_FILES['image']['name'] != '') {
+            // If a new image is uploaded
+            // $image = rand(111111111, 999999999) . '_' . $_FILES['image']['name'];
+            // move_uploaded_file($_FILES['image']['tmp_name'], 'PRODUCT_IMAGE_SERVER_PATH' . $image);
+        // }
+        // if (isset($_GET['id']) && $_GET['id'] != '') {
+        //     // Update product
+        //     $id = $_GET['id'];
+            $update_sql = "UPDATE products SET categories_id = '$categories_id', name = '$name', mrp = '$mrp', 
+                           price = '$price', qty = '$qty', image = '$image', short_desc = '$short_desc', 
+                           description = '$description', meta_title = '$meta_title', meta_desc = '$meta_desc', 
+                           meta_keyword = '$meta_keyword' WHERE id = '$id'";
+            mysqli_query($con, $update_sql);
+        } else {
+            $image = rand(111111111, 999999999) . '_' . $_FILES['image']['name'];
+            move_uploaded_file($_FILES['image']['tmp_name'], 'PRODUCT_IMAGE_SERVER_PATH' . $image);
+            // Insert new product
+            mysqli_query($con, "INSERT INTO products (categories_id, name, mrp, price, qty, image, short_desc, description, 
+                               meta_title, meta_desc, meta_keyword, status) VALUES ('$categories_id', '$name', 
+                               '$mrp', '$price', '$qty', '$image', '$short_desc', '$description', '$meta_title', 
+                               '$meta_desc', '$meta_keyword', 1)");
+        }
+        // Redirect to product page after adding/updating
+        header('Location: product.php');
+        exit();
+    }
+
+
+
+
+
+// if(isset($_POST['submit1']))
+// {
+//  $categories_id=get_safe_value($con,$_POST['categories_id']);
+//     $name=get_safe_value($con,$_POST['name']);
+//     $mrp=get_safe_value($con,$_POST['mrp']);
+//     $price=get_safe_value($con,$_POST['price']);
+//      $image=get_safe_value($con,$_POST['img']);
+//     $qty=get_safe_value($con,$_POST['qty']);
+//     $short_desc=get_safe_value($con,$_POST['short_desc']);
+//     $description=get_safe_value($con,$_POST['description']);
+//     $meta_title=get_safe_value($con,$_POST['meta_title']);
+//     $meta_desc=get_safe_value($con,$_POST['meta_desc']);
+//     $meta_keyword=get_safe_value($con,$_POST['meta_keyword']);
+
 //    move_uploaded_file($_FILES['image']['name'],'PRODUCT_IMAGE_SERVER_PATH'.$image);
 
 //     mysqli_query($con,"insert into products (categories_id,name,mrp,price,qty,image,
-//     ,short_desc,description,meta_title,meta_desc,meta_keyword,status)
+//     short_desc,description,meta_title,meta_desc,meta_keyword,status)
 //       values(2,'$name','$mrp','$price','$qty','$image','$short_description','$description',
 //       '$meta_title','$meta_desc','$meta_keyword',1)");
      
@@ -79,11 +167,11 @@ if(isset($_POST['submit']))
 // $meta_keyword = get_safe_value($con, $_POST['meta_keyword']);
 
 // Check if product already exists
-$res = mysqli_query($con, "SELECT * FROM product WHERE name='$name'");
-$check = mysqli_num_rows($res);
-if ($check > 0) {
-    $msg = "Product already exists";
-}
+// $res = mysqli_query($con, "SELECT * FROM product WHERE name='$name'");
+// $check = mysqli_num_rows($res);
+// if ($check > 0) {
+//     $msg = "Product already exists";
+// }
 
 // Check file format for image upload
 // Note: Your condition for file format was incorrect, fixed it here
@@ -94,36 +182,7 @@ if ($_FILES['image']['type']!= '' &&
     $msg = "Please select only jpg, jpeg, or png format for the image";
 }
 
-if ($msg == '') {
-    if (isset($_GET['id']) && $_GET['id'] != '') {
-        // Update product
-        $id = $_GET['id'];
-        $image = ''; // Initialize image variable
-        if ($_FILES['image']['name'] != '') {
-            // If a new image is uploaded
-            $image = rand(111111111, 999999999) . '_' . $_FILES['image']['name'];
-            move_uploaded_file($_FILES['image']['tmp_name'], 'PRODUCT_IMAGE_SERVER_PATH' . $image);
-        }
-        if (isset($_GET['id']) && $_GET['id'] != '') {
-            // Update product
-            $id = $_GET['id'];
-            $update_sql = "UPDATE product SET categories_id = '$categories_id', name = '$name', mrp = '$mrp', 
-                           price = '$price', qty = '$qty', image = '$image', short_desc = '$short_desc', 
-                           description = '$description', meta_title = '$meta_title', meta_desc = '$meta_desc', 
-                           meta_keyword = '$meta_keyword' WHERE id = '$id'";
-            mysqli_query($con, $update_sql);
-        } else {
-            // Insert new product
-            mysqli_query($con, "INSERT INTO product (categories_id, name, mrp, price, qty, image, short_desc, description, 
-                               meta_title, meta_desc, meta_keyword, status) VALUES ('$categories_id', '$name', 
-                               '$mrp', '$price', '$qty', '$image', '$short_desc', '$description', '$meta_title', 
-                               '$meta_desc', '$meta_keyword', 1)");
-        }
-        // Redirect to product page after adding/updating
-        header('Location: product.php');
-        exit();
-    }
-}
+
         // Update product query
     //     $update_sql = "UPDATE product SET categories_id = '$categories_id', name = '$name', mrp = '$mrp', 
     //                    price = '$price', qty = '$qty', short_desc = '$short_desc', description = '$description', 
@@ -202,7 +261,7 @@ if ($msg == '') {
          // header('Location: product.php');
          // exit();
          // }
-    }
+    
 ?>
 <div class="content pb-0">
     <div class="animated fadeIn">
@@ -265,11 +324,13 @@ if ($msg == '') {
                                 <label class="form-control-label">Meta Keyword</label>
                                 <textarea name="meta_keyword" id="meta_keyword" placeholder="Please Enter Product's meta keyword !" class="form-control"><?php echo $meta_keyword ?></textarea>
                             </div>
-                            <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                            <button id="payment-button" name="submit" type="submit" class="btn btn-lg btn-info btn-block">
                                 <span id="payment-button-amount">Submit</span>
                             </button>
                         </div>
                     </form>
+
+                    
                 </div>
             </div>
         </div>

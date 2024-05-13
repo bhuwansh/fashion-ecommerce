@@ -1,0 +1,8 @@
+    $categories=get_safe_value($con,$_POST['categories']);
+
+
+$res=  mysqli_query($con,"insert into categories(categories,status)values('$categories' , 1)");
+
+echo $res;
+header('location:categories.php');
+die();

@@ -57,7 +57,7 @@ $cat_id=mysqli_real_escape_string($con,$_GET['id']);
                             $get_products = get_products($con,'','',$cat_id );
                             foreach ($get_products as $list) {
                             ?>
-                                <div class="col-md-4 col-lg-3 col-sm-4 col-xs-12">
+                                <div class="col-md-3 col-lg-3 col-sm-4 col-xs-12">
                                     <div class="category">
                                         <div class="ht__cat__thumb">
                                             <a href="product-details.php?id=<?php echo $list['id'] ?>">
@@ -77,6 +77,7 @@ $cat_id=mysqli_real_escape_string($con,$_GET['id']);
                             <?php
                             }
                             ?>
+                            
                                     
                                        
                                        

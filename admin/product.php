@@ -2,21 +2,21 @@
 require('top.inc.php');
 
 if(isset($_GET['type']) && $_GET['type']!=''){
-  $type = mysqli_real_escape_string($con,$_GET['type']);
+  $type = get_safe_value($con,$_GET['type']);
   if($type == 'status'){
-    $operation = mysqli_real_escape_string($con,$_GET['operation']);
-    $id = mysqli_real_escape_string($con,$_GET['id']);
+    $operation = get_safe_value($con,$_GET['operation']);
+    $id = get_safe_value($con,$_GET['id']);
     if($operation=='active'){
         $status='1';
     }else{
         $status='0';
     }
-    $update_status_sql="update product set status='$status' where id='$id'";
+    $update_status_sql="update products set status='$status' where id='$id'";
     mysqli_query($con,$update_status_sql);
    }
     elseif($type == 'delete'){
-      $id = mysqli_real_escape_string($con,$_GET['id']);
-      $delete_sql = "Delete from product where id='$id'";
+      $id = get_safe_value($con,$_GET['id']);
+      $delete_sql = "Delete from products where id=$id";
       mysqli_query($con,$delete_sql);
       }    
   }      
@@ -36,7 +36,7 @@ $product_list=get_product_list($con);
                      <div class="card">
                         <div class="card-body">
                            <h4 class="box-title">Products</h4>
-                           <h4 class="box-link"><a href="manage_product.php">Add Prducts</a></h4>
+                           <h4 class="box-link"><a href="manage_products2.php">Add Prducts</a></h4>
                         </div>
                         <div class="card-body--">
                            <div class="table-stats order-table ov-h">
@@ -51,7 +51,7 @@ $product_list=get_product_list($con);
                                        <th>MRP</th>
                                        <th>Price</th>
                                        <th>Qty</th>
-                                       <th>####</th>
+                                       
                                         </tr>
                                  </thead>
                                  <tbody>
@@ -78,18 +78,20 @@ $product_list=get_product_list($con);
                                                    echo "<span class='badge badge-pending'>
                                                    <a href='?type=status&operation=active&id=".$row['id']."'>Deactive</a></span>&nbsp;";
                                                }
-                                               echo "<span class='badge badge-edit'><a href='manage_product.php?id=".$row['id']."'>Edit</a></span>&nbsp;"; 
-                                               echo "<span class='badge badge-delete'><a href='?type=delete&id=".$row['id']."'>Delete</a></span>"; 
                                                ?>
+                                               <span class='badge badge-edit'><a href='manage_products2.php?id=".$row['id']."'>Edit</a></span>&nbsp; 
+                                               <span class='badge badge-delete'><a href='?type=delete&id=".$row['id']."'>Delete</a></span> 
                                            </td>
                                        </tr>
-                                        
-
-                                       <?php
-                                         $i++;
+                                     <?php
+                                    $i++;
                                        }
-                                    } 
+                                    } else {
+                           
+                                       echo "Error executing query: " . mysqli_error($con); // Assuming $conn is your database connection
+                                   }
                                        ?>
+                                      
                                        
                               </tbody>
                             </table>
