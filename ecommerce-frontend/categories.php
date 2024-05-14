@@ -12,13 +12,6 @@ $cat_id=mysqli_real_escape_string($con,$_GET['id']);
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="bradcaump__inner">
-                                <nav class="bradcaump-inner">
-                                  <a class="breadcrumb-item text-dark" href="index.php">Home</a>
-                                  <span class="brd-separetor"><i class="zmdi zmdi-chevron-right"></i></span>
-                                  <span class="breadcrumb-item  text-dark">Products</span>
-                                 
-
-                                </nav>
                             </div>
                         </div>
                     </div>
@@ -52,8 +45,7 @@ $cat_id=mysqli_real_escape_string($con,$_GET['id']);
                                        
                                         <!-- End Single Product -->
                                         <!-- Start Single Product -->
-                                        <?php
-                            // Assuming get_product function fetches products correctly
+                             <?php
                             $get_products = get_products($con,'','',$cat_id );
                             foreach ($get_products as $list) {
                             ?>

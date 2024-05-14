@@ -8,7 +8,9 @@
                     <div class="footer">
                         <h2 class="title__line--2">ABOUT US</h2>
                         <div class="ft__details">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim</p>
+                            <p>An About Us page is a section on a website that provides information about a company, organization,
+                                 or individual. It is an opportunity to tell your brand’s story, share your vision, history, values,
+                                  and achievements, and introduce team members. This is where you build trust and credibility with customers.</p>
                             <div class="ft__social__link">
                                 <ul class="social__link">
                                     <li><a href="#"><i class="icon-social-twitter icons"></i></a></li>
@@ -71,20 +73,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-3 col-sm-6 col-xs-12 xmt-40 smt-40">
-                    <div class="footer">
-                        <h2 class="title__line--2">NEWSLETTER </h2>
-                        <div class="ft__inner">
-                            <div class="news__input">
-                                <input type="text" placeholder="Your Mail*">
-                                <div class="send__btn">
-                                    <a class="fr__btn" href="#">Send Mail</a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+               
 
             </div>
         </div>

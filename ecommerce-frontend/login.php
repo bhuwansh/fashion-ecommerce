@@ -1,9 +1,13 @@
+<?php
+require('connection.inc.php');
+?>
+
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Cart </title>
+    <title>Login/Register</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -35,11 +39,8 @@
 </head>
 
 <body>
-    <!--[if lt IE 8]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->  
-
-    <!-- Body main wrapper start -->
+<form action="index.php" method="post">
+<!-- Body main wrapper start -->
     <div class="wrapper">
         <!-- Start Header Style -->
         <header id="htc__header" class="htc__header__area header--one">
@@ -50,22 +51,28 @@
                         <div class="menumenu__container clearfix">
                             <div class="col-lg-2 col-md-2 col-sm-3 col-xs-5"> 
                                 <div class="logo">
-                                     <a href="index.php"><img src="images/logo/logo.png" alt="logo images"></a>
+                                     <a href="login.php"><img src="images/logo/logo.png" alt="logo images"></a>
                                 </div>
                             </div>
-                            <div class="col-md-7 col-lg-8 col-sm-5 col-xs-3">
+                            <div class="col-md-7 
+                            col-lg-8 col-sm-5 col-xs-3">
                                 <nav class="main__menu__nav hidden-xs hidden-sm">
                                     <ul class="main__menu">
-                                        <li class="drop"><a href="index.php">Home</a></li>
-                                        <li class="drop"><a href="index.php">women</a>
+                                        <li class="drop"><a href="login.php">Home</a></li>
+                                        <li class="drop"><a href="#">women</a>
                                            
+                                                <!-- Start Single Mega MEnu -->
+                                                <li><a href="checkout.html">checkout</a></li>
+                                                        <li><a href="wishlist.html">wishlist</a></li>
+                                                    </ul>
+                                                </li>
                                 </nav>
 
                                 
                             </div>
                             <div class="col-md-3 col-lg-2 col-sm-4 col-xs-4">
                                 <div class="header__right">
-                                   
+                                    
                                     <div class="header__account">
                                         <a href="#"><i class="icon-user icons"></i></a>
                                     </div>
@@ -87,8 +94,57 @@
         <div class="body__overlay"></div>
         <!-- Start Offset Wrapper -->
         <div class="offset__wrapper">
-           
-           
+            <!-- Start Search Popap -->
+          
+            <!-- Start Cart Panel -->
+            <div class="shopping__cart">
+                <div class="shopping__cart__inner">
+                    <div class="offsetmenu__close__btn">
+                        <a href="#"><i class="zmdi zmdi-close"></i></a>
+                    </div>
+                    <div class="shp__cart__wrap">
+                        <div class="shp__single__product">
+                            <div class="shp__pro__thumb">
+                                <a href="#">
+                                    <img src="images/product/zara top1.jpg" alt="product images">
+                                </a>
+                            </div>
+                            <div class="shp__pro__details">
+                                <h2><a href="product-details.php">ZARA top premium Quality</a></h2>
+                                <span class="quantity">QTY: 1</span>
+                                <span class="shp__price">₹1599.00</span>
+                            </div>
+                            <div class="remove__btn">
+                                <a href="#" title="Remove this item"><i class="zmdi zmdi-close"></i></a>
+                            </div>
+                        </div>
+                        <div class="shp__single__product">
+                            <div class="shp__pro__thumb">
+                                <a href="#">
+                                    <img src="images/products/traditional (3).jpeg" alt="product images">
+                                </a>
+                            </div>
+                            <div class="shp__pro__details">
+                                <h2><a href="product-details.php">Beautiful Anarkali Dress</a></h2>
+                                <span class="quantity">QTY: 1</span>
+                                <span class="shp__price">₹2500.00</span>
+                            </div>
+                            <div class="remove__btn">
+                                <a href="#" title="Remove this item"><i class="zmdi zmdi-close"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="shoping__total">
+                        <li class="subtotal">Subtotal:</li>
+                        <li class="total__price">₹4099.00</li>
+                    </ul>
+                    <ul class="shopping__btn">
+                        <li><a href="cart.html">View Cart</a></li>
+                        <li class="shp__checkout"><a href="checkout.html">Checkout</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- End Cart Panel -->
         </div>
         <!-- End Offset Wrapper -->
         <!-- Start Bradcaump area -->
@@ -97,107 +153,109 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-12">
-                           
+                            <div class="bradcaump__inner">
+                        
+                               
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- End Bradcaump area -->
-        <!-- cart-main-area start -->
-        <div class="cart-main-area ptb--100 bg__white">
+        <!-- Start Contact Area -->
+        <section class="htc__contact__area ptb--100 bg__white">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <form action="#">               
-                            <div class="table-content table-responsive">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th class="product-thumbnail">products</th>
-                                            <th class="product-name">name of products</th>
-                                            <th class="product-price">Price</th>
-                                            <th class="product-quantity">Quantity</th>
-                                            <th class="product-subtotal">Total</th>
-                                            <th class="product-remove">Remove</th>
-                                        </tr> 
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="product-thumbnail"><a href="#">
-                                                <img src="images/product/zara top1.jpg" alt="product img" /></a></td>
-                                            <td class="product-name"><a href="#">New Zara Top</a>
-                                                <ul  class="pro__prize">
-                                                    <li class="old__prize">₹2500</li>
-                                                    <li>₹2449</li>
-                                                </ul>
-                                            </td>
-                                            <td class="product-price"><span class="amount">₹2449</span></td>
-                                            <td class="product-quantity"><input type="number" value="1" /></td>
-                                            <td class="product-subtotal">₹2449.00</td>
-                                            <td class="product-remove"><a href="#"><i class="icon-trash icons"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="product-thumbnail"><a href="#"><img src="images/product/12.jpg" alt="product img" /></a></td>
-                                            <td class="product-name"><a href="#">ZARA Top Premium Quality</a>
-                                                <ul  class="pro__prize">
-                                                    <li class="old__prize">₹1500</li>
-                                                    <li>₹1349</li>
-                                                </ul>
-                                            </td>
-                                            <td class="product-price"><span class="amount">₹1349</span></td>
-                                            <td class="product-quantity"><input type="number" value="1" /></td>
-                                            <td class="product-subtotal">₹1349</td>
-                                            <td class="product-remove"><a href="#"><i class="icon-trash icons"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="product-thumbnail"><a href="#"><img src="images/product/9.jpg" alt="product img" /></a></td>
-                                            <td class="product-name"><a href="#">Cotton Topper for Summer</a>
-                                                <ul  class="pro__prize">
-                                                    <li class="old__prize">₹799</li>
-                                                    <li>₹649</li>
-                                                </ul>
-                                            </td>
-                                            <td class="product-price"><span class="amount">₹649</span></td>
-                                            <td class="product-quantity"><input type="number" value="1" /></td>
-                                            <td class="product-subtotal">₹649</td>
-                                            <td class="product-remove"><a href="#"><i class="icon-trash icons"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="product-thumbnail"><a href="#"><img src="images/product/4.jpg" alt="product img" /></a></td>
-                                            <td class="product-name"><a href="#">H&M Denim jeans</a>
-                                                <ul  class="pro__prize">
-                                                    <li class="old__prize">₹1349</li>
-                                                    <li>₹1199</li>
-                                                </ul>
-                                            </td>
-                                            <td class="product-price"><span class="amount">₹1199</span></td>
-                                            <td class="product-quantity"><input type="number" value="1" /></td>
-                                            <td class="product-subtotal">₹1199</td>
-                                            <td class="product-remove"><a href="#"><i class="icon-trash icons"></i></a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <div class="buttons-cart--inner">
-                                        <div class="buttons-cart">
-                                            <a href="index.php">Continue Shopping</a>
-                                        </div>
-                                        <div class="buttons-cart checkout--btn">
-                                            <a href="cart.html">update</a>
-                                            <a href="checkout.html">checkout</a>
-                                        </div>
+					<div class="col-md-8" style="align: center">
+						<div class="contact-form-wrap mt--60">
+							<div class="col-xs-10">
+								<div class="contact-title">
+									<h2 class="title__line--6" >Sign In</h2>
+								</div>
+							</div>
+							<div class="col-xs-12">
+								<form id="contact-form" action="index.php" method="post">
+									<div class="single-contact-form">
+                                    <div class="contact-box name">
+											<input type="text" name="name" id="name" placeholder="Your Name*" style="width:100%">
+										</div>
                                     </div>
-                                </div>
-                            </div>
-                        </form> 
-                    </div>
-                </div>
+                                    <div class="single-contact-form">
+										<div class="contact-box name">
+											<input type="text" name="name" placeholder="Your Email*" style="width:100%">
+										</div>
+									</div>
+                                    <div class="single-contact-form">
+										<div class="contact-box name">
+											<input type="text" name="name" id="mobile" placeholder="Your Mobile*" style="width:100%">
+										</div>
+									</div>
+									<div class="single-contact-form">
+										<div class="contact-box name">
+											<input type="text" name="name" placeholder="Your Password*" style="width:100%">
+										</div>
+									</div>
+									
+									<div class="contact-btn">
+										<button type="submit" class="fv-btn">Sign In</button>
+									</div>
+								</form>
+								<div class="form-output">
+									<p class="form-messege"></p>
+								</div>
+							</div>
+						</div> 
+                
+				</div>
+				
+
+					<!-- <div class="col-md-6">
+						<div class="contact-form-wrap mt--60">
+							<div class="col-xs-12">
+								<div class="contact-title">
+									<h2 class="title__line--6">Register</h2>
+								</div>
+							</div>
+							<div class="col-xs-12">
+								<form id="contact-form" action="index.php"  method="post">
+									<div class="single-contact-form">
+										<div class="contact-box name">
+											<input type="text" name="name" id="name" placeholder="Your Name*" style="width:100%">
+										</div>
+									</div>
+									<div class="single-contact-form">
+										<div class="contact-box name">
+											<input type="text" name="email" id="email" placeholder="Your Email*" style="width:100%">
+										</div>
+									</div>
+									<div class="single-contact-form">
+										<div class="contact-box name">
+											<input type="text" name="name" id="mobile" placeholder="Your Mobile*" style="width:100%">
+										</div>
+									</div>
+									<div class="single-contact-form">
+										<div class="contact-box name">
+											<input type="password" name="password" id="password" placeholder="Your Password*" style="width:100%">
+										</div>
+									</div>
+									
+									<div class="contact-btn">
+                                    
+									<button type="submit" class="fv-btn"> Register</button>
+									</div>
+								</form>
+								<div class="form-output">
+									<p class="form-messege"></p>
+								</div>
+							</div>
+						</div> 
+                
+				</div> -->
+					
             </div>
-        </div>
-        <!-- cart-main-area end -->
+        </section>
+        <!-- End Contact Area -->
         <!-- End Banner Area -->
         <!-- Start Footer Area -->
         <footer id="htc__footer">
@@ -210,10 +268,10 @@
                             <div class="footer">
                                 <h2 class="title__line--2">ABOUT US</h2>
                                 <div class="ft__details">
-                                    <p>An About Us page is a section on a website that provides information about a company,
-                                         organization, or individual. It is an opportunity to tell your brand’s story, share 
-                                         your vision, history, values, and achievements, and introduce team members. This is
-                                          where you build trust and credibility with customers.</p>
+                                    <p>An About Us page is a section on a website that provides information
+                                         about a company, organization, or individual. It is an opportunity to
+                                          tell your brand's story, share your vision, history, values, and achievements,
+                                           and introduce team members. This is where you build trust and credibility with customers.</p>
                                     <div class="ft__social__link">
                                         <ul class="social__link">
                                             <li><a href="#"><i class="icon-social-twitter icons"></i></a></li>
@@ -281,6 +339,7 @@
                         <!-- End Single Footer Widget -->
                         <!-- Start Single Footer Widget -->
                        
+                        <!-- End Single Footer Widget -->
                     </div>
                 </div>
             </div>
@@ -314,6 +373,9 @@
     <script src="js/plugins.js"></script>
     <script src="js/slick.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
+    <script src="js/ajax-mail.js"></script>
+
+    
     <!-- Waypoints.min.js. -->
     <script src="js/waypoints.min.js"></script>
     <!-- Main js file that contents all jQuery plugins activation. -->

@@ -54,12 +54,15 @@ $get_product = get_product_details($con,$product_id );
                                     <li class="old__prize"> MRP : <?php echo $get_product['mrp'] ?></li>
                                     <li>Price : <?php echo $get_product['price'] ?></li>
                                 </ul>
+                            
                                 <p class="pro__info">Short Description : <?php echo $get_product['short_desc'] ?></p>
                                 <div class="ht__pro__desc">
                                     <div class="sin__desc">
                                         <p><span>Availability:</span> In Stock</p>
                                     </div>
-                                   
+                                    <form id="contact-form" action="cart.html" method="post">
+                                    <div class="contact-btn">
+										<button type="submit" class="fv-btn">Add To Cart</button>
                                     
                                     </div>
                                 </div>
