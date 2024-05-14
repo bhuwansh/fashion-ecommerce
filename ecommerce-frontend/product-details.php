@@ -17,8 +17,6 @@ $get_product = get_product_details($con,$product_id );
                                   <span class="brd-separetor"><i class="zmdi zmdi-chevron-right"></i></span>
                                   <span class="breadcrumb-item active text-dark"><?php echo $get_product['name'] ?></span>
                               
-                                 
-                              
                                 </nav>
                             </div>
                         </div>

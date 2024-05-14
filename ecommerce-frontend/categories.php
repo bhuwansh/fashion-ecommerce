@@ -29,7 +29,7 @@ $cat_id=mysqli_real_escape_string($con,$_GET['id']);
                                 <!-- Start List And Grid View -->
                                 <ul class="view__mode" role="tablist">
                                     <li role="presentation" class="grid-view active"><a href="#grid-view" role="tab" data-toggle="tab"><i class="zmdi zmdi-grid"></i></a></li>
-                                    <li role="presentation" class="list-view"><a href="#list-view" role="tab" data-toggle="tab"><i class="zmdi zmdi-view-list"></i></a></li>
+                                   
                                     
                                 </ul>
                                 <!-- End List And Grid View -->
@@ -38,18 +38,12 @@ $cat_id=mysqli_real_escape_string($con,$_GET['id']);
                             <div class="row">
                                 <div class="shop__grid__view__wrap">
                                     <div role="tabpanel" id="grid-view" class="single-grid-view tab-pane fade in active clearfix">
-                                        <!-- Start Single Product -->
-                                     
-                                        <!-- End Single Product -->
-                                        <!-- Start Single Product -->
-                                       
-                                        <!-- End Single Product -->
-                                        <!-- Start Single Product -->
+                                        
                              <?php
                             $get_products = get_products($con,'','',$cat_id );
                             foreach ($get_products as $list) {
                             ?>
-                                <div class="col-md-3 col-lg-3 col-sm-4 col-xs-12">
+                                <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
                                     <div class="category">
                                         <div class="ht__cat__thumb">
                                             <a href="product-details.php?id=<?php echo $list['id'] ?>">

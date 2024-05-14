@@ -28,7 +28,7 @@ $res=mysqli_query($con,$sql);
                               <table class="table ">
                                  <thead>
                                     <tr>
-                                       <th class="serial">#</th>
+                                       <th class="serial"></th>
                                        <th>ID</th>
                                        <th>Name</th>
                                        <th>Email</th>
@@ -49,8 +49,8 @@ $res=mysqli_query($con,$sql);
                                         <td><?php echo $row['mobile']?></td>
                                         <td><?php echo $row['added_on']?></td>
                                         <td>
-                                            echo "<span class='badge badge-delete'><a href='?type=delete&id=".$row['id']."'>Delete</a></span>"; 
-                                             ?>
+                                           <span class='badge badge-delete'><a href='?type=delete&id=".$row['id']."'>Delete</a></span>
+                                            
                                         </td>
                                     </tr>
                                   <?php } ?>

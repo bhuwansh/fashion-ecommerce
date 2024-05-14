@@ -1,2 +1,7 @@
 #Admin
 fashion-ecom/admin/login.php
+
+
+('$categories_id', '$name', 
+   '$mrp', '$price', '$qty','$image','$short_desc', '$description', '$meta_title', 
+   '$meta_desc', '$meta_keyword', 1)");

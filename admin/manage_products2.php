@@ -48,13 +48,13 @@ if(isset($_POST['submit'])){
     // meta_keyword = '$meta_keyword' WHERE id = '$id'";
     // mysqli_query($con, $update_sql);
 
-    $image =  rand(111111111, 999999999) . '_' .$_FILES['image']['name'];
-    move_uploaded_file($_FILES['image']['tmp_name'], PRODUCT_IMAGE_SERVER_PATH. $image);
+    // $image =  rand(111111111, 999999999) . '_' .$_FILES['image']['name'];
+    // move_uploaded_file($_FILES['image']['tmp_name'], PRODUCT_IMAGE_SERVER_PATH. $image);
            
    $res=  mysqli_query($con, "INSERT INTO products (categories_id, name, mrp, price, qty,image, short_desc, description, 
-   meta_title, meta_desc, meta_keyword, status) VALUES ('$categories_id', '$name', 
-   '$mrp', '$price', '$qty','$image','$short_desc', '$description', '$meta_title', 
-   '$meta_desc', '$meta_keyword', 1)");
+   meta_title, meta_desc, meta_keyword, status) VALUES ('1', '$name', 
+   '$mrp', '$price', '$qty','western (4).jpeg','short_desc', 'description', 'meta_title', 
+   'meta_desc', 'meta_keyword', 1)");
 
 echo $res;
 header('location:product.php');
